@@ -8,11 +8,16 @@ public class CashRegister {
 		
 		Scanner kb = new Scanner(System.in);
 		
-		System.out.print("Enter the price of the Item: ");
+		System.out.print("Enter the price of the item: ");
+		double totalCost = kb.nextDouble();
 		
-		double userInput = kb.nextDouble();
+		System.out.println("Enter amount given: ");
+		double amountGiven = kb.nextDouble();
 		
-		System.out.println(userInput);
+		
+		System.out.println(totalCost);
+		System.out.println(amountGiven);
+		
 		
 	}
 
