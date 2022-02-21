@@ -5,25 +5,58 @@ import java.util.Scanner;
 public class CashRegister {
 
 	public static void main(String[] args) {
-		
-		Scanner kb = new Scanner(System.in);
-		
-		while(true) {
-			System.out.print("Enter the price of the item: ");
-			double totalCost = kb.nextDouble();
-			System.out.println("Enter amount given: ");
-			double amountGiven = kb.nextDouble();
 
-			if (amountGiven == totalCost) {
-				System.out.println("Exact amount given, no change needed");
-			} else if (amountGiven < totalCost) {
-				System.out.println("Insufficient amount given");
-			} else {
-				double change = amountGiven - totalCost;
-				tendChange(amountGiven, totalCost);
-			}
-			
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.print("Enter the price of the item: ");
+		double totalCost = scanner.nextDouble();
+		System.out.print("Enter amount given: ");
+		double amountGiven = scanner.nextDouble();
+
+		if (amountGiven == totalCost) {
+			System.out.println("Exact amount given, no change needed");
+		} else if (amountGiven < totalCost) {
+			System.out.println("Insufficient amount given");
+		} else {
+			tendChange(amountGiven, totalCost);
 		}
+
+		scanner.close();
+
+	}
+
+	public static void tendChange(double moneyGiven, double totalCost) {
+
+		double change = moneyGiven - totalCost;
+		System.out.printf("Change: %.2f\n", change);
+
+		int dollarsNeeded = (int) change;
+		int coinsNeeded = (int) (((change * 100) % 100) + 0.5);
+
+		int numTwenty = dollarsNeeded / 20;
+		dollarsNeeded = dollarsNeeded % 20;
+
+		int numTen = dollarsNeeded / 10;
+		dollarsNeeded = dollarsNeeded % 10;
+
+		int numFive = dollarsNeeded / 5;
+		dollarsNeeded = dollarsNeeded % 5;
+
+		int numOnes = dollarsNeeded / 1;
+		dollarsNeeded = dollarsNeeded % 1;
+
+		int quarters = coinsNeeded / 25;
+		coinsNeeded = coinsNeeded % 25;
+
+		int dimes = coinsNeeded / 10;
+		coinsNeeded = coinsNeeded % 10;
+
+		int nickels = coinsNeeded / 5;
+		coinsNeeded = coinsNeeded % 5;
+
+		int pennies = coinsNeeded;
+
+		printMessage(numTwenty, numTen, numFive, numOnes, quarters, dimes, nickels, pennies);
 
 	}
 
@@ -44,10 +77,10 @@ public class CashRegister {
 			message += ones + " one dollar bill, ";
 		}
 		if (quarters != 0) {
-			message += quarters + " quarters, ";
+			message += quarters + " quarter, ";
 		}
 		if (dimes != 0) {
-			message += dimes + " dimes, ";
+			message += dimes + " dime, ";
 		}
 		if (nickels != 0) {
 			message += nickels + " nickel, ";
@@ -61,39 +94,4 @@ public class CashRegister {
 
 	}
 
-	public static void tendChange(double amountGiven, double totalCost) {
-
-		double changeNeeded = amountGiven - totalCost;
-		System.out.println("Change needed: " + changeNeeded);
-		System.out.println();
-
-		int dollars = (int) changeNeeded;
-		int coins = (int) (((changeNeeded * 100) % 100) + 0.5);
-
-		int numTwenty = dollars / 20;
-		dollars = dollars % 20;
-
-		int numTen = dollars / 10;
-		dollars = dollars % 10;
-
-		int numFive = dollars / 5;
-		dollars = dollars % 5;
-
-		int numOnes = dollars / 1;
-		dollars = dollars % 1;
-
-		int quarters = coins / 25;
-		coins = coins % 25;
-
-		int dimes = coins / 10;
-		coins = coins % 10;
-
-		int nickels = coins / 5;
-		coins = coins % 5;
-
-		int pennies = coins;
-
-		printMessage(numTwenty, numTen, numFive, numOnes, quarters, dimes, nickels, pennies);
-
-	}
 }
